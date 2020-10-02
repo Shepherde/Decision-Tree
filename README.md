@@ -21,7 +21,7 @@ In case you are seeing the training dataset and wondering "why not hardcoat it?"
 
 * A decision tree makes it very easy to understand what is going on (visually if needed!) and very easy to adjust or modify down datasets down the road!  
 
-Bottom Line: It's faster, easier, and simply the best solution.
+Bottom Line: It's faster, easier, and simply the best solution. 
 
 ## Initial very basic testing:
 
