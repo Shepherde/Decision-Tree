@@ -1,11 +1,20 @@
 # Decision Tree
 # Created with Josh Gordon tutorial on ML Recipes
-import pandas as pd
+import csv
+
+def csv_wrangle(file):
+    ''' wrangles with the csv file -> returns list of each row '''
+    dataset_list = []
+    with open(file) as csvfile:
+        readCSV = csv.reader(csvfile, delimiter=',')
+        for row in readCSV:
+            # print(row)
+            dataset_list.append(row)
+    return dataset_list
 
 def unique_vals(rows, col):
     """Find the unique values for a column in a dataset."""
     return set([row[col] for row in rows])
-
 
 def class_counts(rows):
     """Counts number of each type of example in dataset"""
@@ -264,10 +273,17 @@ if __name__ == "__main__":
         [2,	"A", "M/L", "CA", "W1", "f-h", 1, "A4"],
     ]
 
-    df = pd.read_csv('Matching-Excel.csv')
+    testing_UserToPack = [
+        ['2', '10-11', '1', '1', '3', 'f-h', '2-3', 'FFAP3w3'],
+        ['2', '10-11', '1', '3-4', '1-2', 'f-h', '2-3', 'TP3w1'],
+        ['3', '5-9', '2-3', '1', '3', 'f-h', '2-3', 'AP6w3'],
+        ['1', '5-9', '1', '1', '1-2', 'f-h\xa0', '1', 'AA1w1'],
+        ['1', '5-9', '2-3', '1', '1-2', 'f-h', '1', 'AA2w1']
+    ]
 
     print("-------- TREE -------------------------------------")
-    my_tree = build_tree(training_data_2)
+    my_tree = build_tree(csv_wrangle('UserToPack.csv'))
+
     print_tree(my_tree)
 
-    test(testing_data_2)
+    test(testing_UserToPack)
