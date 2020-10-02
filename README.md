@@ -1,4 +1,4 @@
-# :tree: Decision Tree Classifier :tree:
+# :evergreen_tree: Decision Tree Classifier :evergreen_tree:
 
 ## Rules:
 1. Dataset must have the last column be the target column. 
