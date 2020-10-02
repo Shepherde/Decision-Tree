@@ -9,7 +9,7 @@
 This tree will work on any pretty much dataset. Add as many feature columns as needed - the gini impurity and information gain will be calculated **recursively** on all of them. 
 
 ### CART Algorithm
-Calculates Gini Impurity for all viable partitions
+Calculates Gini Impurity for all viable partitions\
 Based on Information Gain -> decides on Question
 
 ### Why a ML Tree?
