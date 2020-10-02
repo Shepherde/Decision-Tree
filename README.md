@@ -1,9 +1,9 @@
-# :evergreen_tree: Decision Tree Classifier :evergreen_tree:
+# :evergreen_tree: :evergreen_tree: :evergreen_tree: :evergreen_tree: :evergreen_tree: :evergreen_tree: Decision Tree Classifier :evergreen_tree: :evergreen_tree: :evergreen_tree: :evergreen_tree: :evergreen_tree: :evergreen_tree:
 
 ## Rules:
 1. Dataset must have the last column be the target column. 
 2. Specify this target column in tree.py's main function as "header = []" and enter the column names in the list
-3. At the moment, it converts any datapoint into a string because at this moment, the actual numbers are not relevant nor necessary. 
+3. It converts any datapoint into a string because at this moment, the actual numbers are not relevant nor necessary. 
 
 ### Future Proof
 This tree will work on any pretty much dataset. Add as many feature columns as needed - the gini impurity and information gain will be calculated **recursively** on all of them. 
