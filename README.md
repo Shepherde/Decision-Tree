@@ -17,7 +17,7 @@ In case you are seeing the training dataset and wondering "why not hardcoat it?"
 
 *  "if" statements are very much the wrong way to do this. They're tedious, boring, and arduous to keep up with. Not to mention very hard to change logic-wise later with more complicated situations.
 
-* An overkill ML algorithm that gives us 100% accuracy is still 100%. Even if we don't need to predict with some level of accuracy - 100% is always good and helps future adjustments to data. Especially since there is no guess work and the dataset contains every possible outcome!
+* An overkill ML algorithm that gives us 100% accuracy is still 100% even are not predicting anything - this is a relevant and helpful way to solve the problem especially for future adjustments to data. Especially since there is no guess work and the dataset contains every possible outcome!
 
 * A decision tree makes it very easy to understand what is going on (visually if needed!) and very easy to adjust or modify down datasets down the road!  
 
