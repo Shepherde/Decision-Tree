@@ -10,7 +10,7 @@ This tree will work on any pretty much dataset. Add as many feature columns as n
 
 ### CART Algorithm
 Calculates Gini Impurity for all viable partitions\
-Based on Information Gain -> decides on Question
+Based on Information Gain -> decides on order of Question
 
 ### Why a ML Tree?
 In case you are seeing the training dataset and wondering "why not hardcoat it?". Bc ML is more fun and easy to recycle. Technically for this task we do use some form of "intelligence" automation, an ML algorithm, to handle the recommendation process. We don't actually need to use ML - "if" statements will do just fine because we have every possibility pre-outlined right from the start. In fact, ML is almost overkill for this situation. Here's why it's the ideal method for this situation:
