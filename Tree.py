@@ -284,6 +284,6 @@ if __name__ == "__main__":
     print("-------- TREE -------------------------------------")
     my_tree = build_tree(csv_wrangle('UserToPack.csv'))
 
-    print_tree(my_tree)
+    # print_tree(my_tree)
 
     test(testing_UserToPack)
