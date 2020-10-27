@@ -31,5 +31,11 @@ In case you are seeing the training dataset and wondering "why not hardcoat it?"
 Bottom Line: It's faster, easier, and simply the best solution. 
 
 ## Initial very basic testing:
+![treepic](imgs/initial_test.png)
 
-![treepic](imgs/InitialTest.png)
+
+## Current seedpack data (UserToPack.csv) configuration:
+![unique](imgs/unique_vals.png)
+
+
+From the data se can see that users are placed into a range for example '2-3', we never see plants recommended as either only 2 or only for 3 - they are not unique values in the dataset. Thus we can maintain this range. 
