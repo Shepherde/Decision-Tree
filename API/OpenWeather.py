@@ -1,11 +1,16 @@
 
+# This file fetches and processes weather data from Open Weather Map API
+# into decision tree friendly information
+
 import requests
 
 
-def open_weather_fetch(zipcode):
+def weather_fetch(zipcode):
     ''' Fetches weather data from Open Weather API based on zip code 
     returns json of the 7 day forecast or prints  error code
     ''' 
+
+    # Request made to Open Weather, retireve location from zipcode. 
     r = requests.get('http://api.openweathermap.org/data/2.5/weather?zip='+zipcode+',us&appid=f56ee6c2422b8ff51dadde24ec803e5f')
     if r.status_code != 200:  # Handle erroneous requests
         print("Error: " + str(r.status_code))
@@ -19,24 +24,27 @@ def open_weather_fetch(zipcode):
     lat = str(json_object['coord']['lat'])
     lon = str(json_object['coord']['lon'])
 
+    # Second request made to Open Weather. Using lat long -> receive temperature forecast for the next 7 days
+    # if we want to do the past 5 days: https://api.openweathermap.org/data/2.5/onecall/timemachine?lat={lat}&lon={lon}&dt={time}&appid={API key}
+    #  We exclude data we don't need, like minute by minute data
     r2 = requests.get('https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+lon+'&exclude=hourly,minutely&appid=f56ee6c2422b8ff51dadde24ec803e5f')
     if r.status_code != 200:  # Handle erroneous requests
         print("Error: " + str(r.status_code))
     else:
         json_object_2 = r2.json()
+        # for k,v in json_object.items():
+        #     print(k,v)
 
-    return json_object_2
+    return [json_object_2, city, country, lat, lon]
 
 
 
-def open_weather_process(api_data):
+def weather_process(api_data):
     ''' Takes raw api data and returns an integer of the average weather '''  
     
-    daily = api_data['daily']
-    # print(daily)
-
-    # for item in daily:
-    #     print(item['temp']['day'], item['temp'])
+    # Get the 'daily' section of the data
+    daily = api_data[0]['daily']
+    # print('City:', api_data[1], 'Country:', api_data[2])
 
     temp_total = 0
     counter = 0
@@ -44,10 +52,7 @@ def open_weather_process(api_data):
     # Retrieve the temperatures, convert to farenheit, and add to the total
     days = 0
     for item_a in daily:
-        # print(item_a['temp'])
         days += 1
-        # print('Day:',counter)
-
         for key, value in item_a['temp'].items():
             temp_f = round((value - 273.15) * 1.8 + 32)
             # print(temp_f)
@@ -63,8 +68,11 @@ def open_weather_process(api_data):
 def translate_avg_weather(avg_temp):
     ''' Translates API fetched data into Decision Tree readable information
     Climate: 1=Arid, 2=Temperate, 3=Subtropical, 4=Tropical 
-    Weather: 1= hot Avg high > 80; 2 = warm Avg high 65 to 80; 3 = cool Avg high 33 to 65, low: 45-33; 4 = cold Avg high < 32, low ≤ 32 ''' 
+    Weather: 1= hot Avg high > 80; 2 = warm Avg high 65 to 80; 3 = cool Avg high 33 to 65, low: 45-33; 4 = cold Avg high < 32, low ≤ 32 
+    Weather range: 1-2 or 3
+    ''' 
     
+    # Categorize the average temperature into one of the above categories
     category = None
 
     if avg_temp >= 80:
@@ -76,14 +84,22 @@ def translate_avg_weather(avg_temp):
     elif avg_temp <= 32:
         category = 4
     
+    # We have two possible ranges in the dataset for weather listed above
+    if category < 3:
+        dataset_range = '1-2'
+    elif category == 3:
+        dataset_range = '3'
+    elif category == 4:
+        dataset_range = '4'
+
     # print(category)
     return int(category)
 
 
 def wthr_num(zip_code):
 
-    wthr_data = open_weather_fetch(zip_code)
-    wthr_average = open_weather_process(wthr_data)
+    wthr_data = weather_fetch(zip_code)
+    wthr_average = weather_process(wthr_data)
     wthr_value = translate_avg_weather(wthr_average)
 
     # print(wthr_value)
