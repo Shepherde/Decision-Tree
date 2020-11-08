@@ -1,5 +1,7 @@
 import requests
 
+''' Currently UNUSED - switched to Azavea Climate API ''' 
+
 class NOAAData(object):
     """ NOAA class fetches different sets of data from National Oceanic and Atmospheric Administration by @cravden """
 

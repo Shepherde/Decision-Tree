@@ -1,5 +1,5 @@
 # Decision Tree
-# Created with Josh Gordon tutorial on ML Recipes
+# Created with Josh Gordon's ML Recipes
 import csv
 
 def csv_wrangle(file):
@@ -10,6 +10,7 @@ def csv_wrangle(file):
         for row in readCSV:
             # print(row)
             dataset_list.append(row)
+    print(dataset_list)
     return dataset_list
 
 def unique_vals(rows, col):
@@ -283,7 +284,9 @@ if __name__ == "__main__":
     ]
 
     # BUILD RUN TEST the TREE
-    print("-------- TREE -------------------------------------")
-    my_tree = build_tree(csv_wrangle('Datasets/UserToPack.csv'))
-    print_tree(my_tree)
-    test(testing_UserToPack)
+    # print("-------- TREE -------------------------------------")
+    # my_tree = build_tree(csv_wrangle('Datasets/UserToPack.csv'))
+    # print_tree(my_tree)
+    # test(testing_UserToPack)
+
+    csv_wrangle('Datasets/UserToPack.csv')

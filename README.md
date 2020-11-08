@@ -5,7 +5,7 @@
 2. Specify this target column in tree.py's main function as "header = []" and enter the column names in the list
 3. It converts any datapoint into a string because at this moment, the actual numbers are not relevant nor necessary.
 
-## How to use: (not dockerized yet)
+## How to use: (not dockerized yet - running locally is free and this is lightweight)
 1. clone repo
 2. install python
 3. in tree.py's main -> specify file for training dataset, testing data, and headers
@@ -38,4 +38,5 @@ Bottom Line: It's faster, easier, and simply the best solution.
 ![unique](imgs/unique_vals.png)
 
 
-From the data se can see that users are placed into a range for example '2-3', we never see plants recommended as either only 2 or only for 3 - they are not unique values in the dataset. Thus we can maintain this range. 
+We have been given every possibility and they are represented by the range values. Key points:\
+From the data se can see that users are placed into a range for example '2-3', we never see plants recommended as either only 2 or only for 3 - they are not unique values in the dataset. Data also never overlaps any of the ranges. Thus we can maintain this range. 
