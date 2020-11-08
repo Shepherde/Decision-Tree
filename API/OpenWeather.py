@@ -67,7 +67,6 @@ def weather_process(api_data):
 
 def translate_avg_weather(avg_temp):
     ''' Translates API fetched data into Decision Tree readable information
-    Climate: 1=Arid, 2=Temperate, 3=Subtropical, 4=Tropical 
     Weather: 1= hot Avg high > 80; 2 = warm Avg high 65 to 80; 3 = cool Avg high 33 to 65, low: 45-33; 4 = cold Avg high < 32, low ≤ 32 
     Weather range: 1-2 or 3
     ''' 
@@ -83,6 +82,9 @@ def translate_avg_weather(avg_temp):
         category = 3
     elif avg_temp <= 32:
         category = 4
+    else:
+        print('error: category')
+        return  
     
     # We have two possible ranges in the dataset for weather listed above
     if category < 3:

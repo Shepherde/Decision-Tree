@@ -1,3 +1,8 @@
+
+''' This file fetches climate data for a zipcode from the Azavea Climate organization
+and compiles the numbers for each year into a decision tree readable value ''' 
+
+
 import requests
 import json
 
@@ -14,7 +19,7 @@ def climate_fetch(zipcode):
     lat = weather_data[3]
     lon = weather_data[4]
     
-    token = ''
+    token = '6a096669f08500167edb361455210681ad1d8cbd'
     baseurl = 'https://app.climate.azavea.com/api/'
     header = {'Authorization': 'Token {}'.format(token),
                        'Origin': 'https://www.serch.us'}
@@ -69,8 +74,24 @@ def climate_process(api_data):
 
     # print(api_data['data']['2003']['tasmax'])
 
-    return climate_f
-        
+    return int(climate_f)
+
+def climate_translate(avg_climate):
+    ''' Climate: 1=Arid, 2=Temperate, 3=Subtropical, 4=Tropical '''
+
+    category = None
+
+    if avg_climate >= 64:
+        category = '4'
+    elif 50 <= avg_climate < 64:
+        category = '3'
+    elif 26 <= avg_climate < 50:
+        category = '2'
+    else:
+        category = '1'
+    
+    
+
 
 def clim_num(zipcode):
     fetch = climate_fetch(zipcode)
