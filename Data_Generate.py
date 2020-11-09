@@ -64,7 +64,8 @@ def write_to_csv(data):
 
         # RANDOMLY SAMPLE EACH RANGE and ADD THAT NEW ROW TO A NEW LIST
         counter = 0
-        sample_size = 5
+        sample_size = 10
+        new_datalist = []
 
         while counter < sample_size:
             print('counter: ', counter)
