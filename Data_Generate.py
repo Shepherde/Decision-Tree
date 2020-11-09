@@ -27,6 +27,9 @@ def csv_wrangle(file):
 
 def write_to_csv(data):
 
+    new_datalist = []
+
+    # LOOP THROUGH EACH ROW
     for i, row in enumerate(data):
         print(i, row)
 
@@ -60,37 +63,48 @@ def write_to_csv(data):
                 elif difference > largest:
                     largest = difference 
             
-        print('largest: ', largest)
+        # print('largest: ', largest)
 
-        # RANDOMLY SAMPLE EACH RANGE and ADD THAT NEW ROW TO A NEW LIST
+        # RANDOMLY SAMPLE EACH RANGE sample_size NUMBER OF TIMES and ADD THAT NEW ROW TO A NEW LIST
         counter = 0
         sample_size = 10
-        new_datalist = []
 
+        # sample_size is the number of times we want to sample the range
+        # each iteration we do one sample of each range - which creates a new row
         while counter < sample_size:
-            print('counter: ', counter)
-            new_row = []
-            
-            for index, item in enumerate(row):
 
-                if item[0:dash].isdigit():
-                    # create a new row
-                    if '-' in item and index != 7:
-                        # sample the range
-                        print('range ', item[dash+1:], item[0:dash])
+            new_row = []
+            print('counter: ', counter)
+            
+            # for each item in the row
+            for index, item in enumerate(row):
+                print(index, item)
+
+                # sample it if it's a range
+                if '-' in item and index != 7:
+
+                    # if digits
+                    dash = item.index('-')
+                    if item[0:dash].isdigit():
+                        # create a new row, sample the range
+                        # print(item, dash,  'range ', item[dash+1:], item[0:dash])
                         sampled_value = random.sample(range(int(item[0:dash]), int(item[dash+1:])), 1)
                         print('sampled: ', sampled_value, ' from ', int(item[dash+1:]), int(item[0:dash]))
                         new_row.append(sampled_value)
+
+                    # if letters
                     else:
-                        new_row.append(item)
-                    print('NEW ROW: ', new_row)
+                        break 
 
+                # if no range, or is the last item in the dataset, just append the item
                 else:
-                    break 
+                    new_row.append(item)
 
-            print('hello?', value[0:dash])
+
+            print('NEW ROW: ', new_row)
             counter += 1
-        # ADD THEM TO OUR NEW DATASET
+            # ADD THEM TO OUR NEW DATASET
+            new_datalist.append(new_row)
 
 
     # with open('mycsv.csv', 'w', newline = '') as f:
@@ -101,7 +115,7 @@ def write_to_csv(data):
     #     for i in range(1, 10):
     #         thewriter.writerow(['one', 'two', 'three'])
 
-
+    # print(new_datalist)
     return 
 
 if __name__ == "__main__":
