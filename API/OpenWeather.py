@@ -44,7 +44,7 @@ def weather_process(api_data):
     
     # Get the 'daily' section of the data
     daily = api_data[0]['daily']
-    # print('City:', api_data[1], 'Country:', api_data[2])
+    print('City:', api_data[1], 'Country:', api_data[2])
 
     temp_total = 0
     counter = 0
@@ -104,12 +104,12 @@ def wthr_num(zip_code):
     wthr_average = weather_process(wthr_data)
     wthr_value = translate_avg_weather(wthr_average)
 
-    # print(wthr_value)
+    print(wthr_value)
     return wthr_value
 
 
 if __name__ == "__main__":
 
-    zip_code = '94108'
+    zip_code = '60565'
     wthr_num(zip_code)
     

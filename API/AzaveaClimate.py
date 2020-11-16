@@ -11,7 +11,7 @@ from OpenWeather import weather_fetch
 
 
 def climate_fetch(zipcode):
-    ''' function fetches the json data for a zipcodes' climate data
+    ''' function fetches the json data for a zipcode's climate data
     returns the raw json data ''' 
     
     # Get lat lon data from weather_fetch Open Weather API
