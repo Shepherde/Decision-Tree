@@ -10,7 +10,7 @@ def csv_wrangle(file):
         for row in readCSV:
             # print(row)
             dataset_list.append(row)
-    print(dataset_list)
+    # print(dataset_list)
     return dataset_list
 
 def unique_vals(rows, col):
@@ -238,41 +238,7 @@ def test(test_data):
 
 if __name__ == "__main__":
 
-    # header = ["Color", "Size", "Type"]
-
-    # training_data = [
-    # ['Green', 3, 'Apple'],
-    # ['Yellow', 3, 'Apple'],
-    # ['Red', 1, 'Grape'],
-    # ['Red', 1, 'Grape'],
-    # ['Yellow', 3, 'Lemon'],
-    # ]
-
-    # testing_data = [
-    # ['Green', 3, 'Apple'],
-    # ['Yellow', 4, 'Apple'],
-    # ['Red', 2, 'Grape'],
-    # ['Red', 1, 'Grape'],
-    # ['Yellow', 3, 'Lemon'],
-    # ]
-
     header = ["Sun", "Hardiness", "Size", "Climate", "Weather", "Type", "Experience", "Pack"]
-
-    training_data_2 = [
-        [1,	"A", "S", "CA", "W1", "f-h", 1, "A1"],
-        [1,	"A", "M/L", "CA", "W1",	"f-h", 1, "A2"],
-        [2,	"A", "S", "CA", "W1", "f-h", 1, "A3"],
-        [2,	"A", "M/L", "CA", "W1", "f-h", 1, "A4"],
-        [3,	"A", "S", "CA", "W1", "f-h", 1, "A5"],
-        [3,	"A", "M/L", "CA", "W1", "f-h", 1, "A6"]
-    ]
-
-    testing_data_2 = [
-        [1,	"A", "S", "CA", "W1", "f-h", 1, "A1"],
-        [1,	"A", "M/L",	"CA", "W1", "f-h", 1, "A2"],
-        [3,	"A", "M/L", "CA", "W1", "f-h", 1, "A6"],
-        [2,	"A", "M/L", "CA", "W1", "f-h", 1, "A4"],
-    ]
 
     testing_UserToPack = [
         ['2', '10-11', '1', '1', '3', 'f-h', '2-3', 'FFAP3w3'],
@@ -280,13 +246,17 @@ if __name__ == "__main__":
         ['3', '5-9', '2-3', '1', '3', 'f-h', '2-3', 'AP6w3'],
         ['1', '5-9', '1', '1', '1-2', 'f-h\xa0', '1', 'AA1w1'],
         ['1', '5-9', '2-3', '1', '1-2', 'f-h', '1', 'AA2w1'],
-        ['3', '5-9', '2-3', '1', '3', 'f-h', '2']
+        ['3', '5-9', '2-3', '1', '3', 'f-h', '2'],
+        ["3","5-9","1","2-3","4","f-h","2-3"],
+        ['2','5-9','1','2-3','3','f-h','1']
+
     ]
 
     # BUILD RUN TEST the TREE
-    # print("-------- TREE -------------------------------------")
+    print("-------- TREE -------------------------------------")
     # my_tree = build_tree(csv_wrangle('Datasets/UserToPack.csv'))
-    # print_tree(my_tree)
-    # test(testing_UserToPack)
+    my_tree = build_tree(csv_wrangle('Datasets/Generate_20.csv'))
+    print_tree(my_tree)
+    test(testing_UserToPack)
 
-    csv_wrangle('Datasets/UserToPack.csv')
+    # csv_wrangle('Datasets/UserToPack.csv')

@@ -8,6 +8,12 @@ It does this by looping through each row and its items.
 If we find an item with a range in it, we need to create a few versions of that row. 
 
 For each range in the row, we randomly sample from each. 
+
+** Changing the number of samples:
+Change the sample_size on line 91 to however many times you want to sample each range in each row. 
+
+** new dataset:
+change line 63 "index != " the index of the last column (output)
 ''' 
 
 # row 1 = 1, 2-3, 3, 3-5, 4
@@ -28,11 +34,11 @@ def csv_wrangle(file):
 
 def crange(arg1, arg2):
 	"""character range, crange(stop) or crange(start, stop)"""
-	print('crange: ', len(arg1), len(arg2))
-	print('args: ', arg1, arg2)
+	# print('crange: ', len(arg1), len(arg2))
+	# print('args: ', arg1, arg2)
 	start = string.ascii_letters.index(arg1)
 	stop = string.ascii_letters.index(arg2)
-	print(start, stop)
+	# print(start, stop)
 
 	for index in range(start, stop+1):
 		yield string.ascii_letters[index]
@@ -82,7 +88,7 @@ def data_gen(data):
 
 		# RANDOMLY SAMPLE EACH RANGE: sample_size NUMBER OF TIMES and ADD THAT NEW ROW TO A NEW LIST
 		counter = 0
-		sample_size = 10
+		sample_size = 100
 
 		# sample_size is the number of times we want to sample the range
 		# each iteration we do one sample of each range - which creates a new row
@@ -99,6 +105,7 @@ def data_gen(data):
 				if '-' in item and index != 7:
 
 					# if digits
+					# print(index, item)
 					dash = item.index('-')
 					if item[0:dash].isdigit():
 						# create a new row, sample the range
@@ -119,10 +126,10 @@ def data_gen(data):
 						for stuff in (crange(item1, item2)):
 							chars += str(stuff)
 
-						print('chars = ', chars)
+						# print('chars = ', chars)
 					
 						sampled_char = random.sample(chars, 1)
-						print('sampled: ', sampled_char, ' from ', item[0:dash], ' to ', item[dash+1:])
+						# print('sampled: ', sampled_char, ' from ', item[0:dash], ' to ', item[dash+1:])
 
 						for creature in sampled_char:	
 							new_row.append(str(creature))
@@ -139,7 +146,7 @@ def data_gen(data):
 
 	counter = 1
 	for item in new_datalist:
-		print(counter, item)
+		# print(counter, item)
 		counter += 1
 
 	# print(new_datalist)
@@ -147,21 +154,20 @@ def data_gen(data):
 
 
 def write_to_csv(data):
-    # with open('mycsv.csv', 'w', newline = '') as f:
-    #     thewriter = csv.writer(f)
-
-    #     thewriter.writerow(['col1', 'col2', 'col3'])
+    with open('Datasets/Generate_100.csv', 'w', newline = '') as f:
+        thewriter = csv.writer(f)
  
-    #     for i in range(1, 10):
-    #         thewriter.writerow(['one', 'two', 'three'])
+        for row in data:
+            thewriter.writerow(row)
     return
 
 
 if __name__ == "__main__":
     
-    file = 'Datasets/UserToPack.csv'
-    as_list = csv_wrangle(file)
-    data_gen(as_list)
+	file = 'Datasets/UserToPack.csv'
+	as_list = csv_wrangle(file)
+	data = data_gen(as_list)
+	write_to_csv(data)
 
     # item1 = 'f'
     # item2 = 'h'
