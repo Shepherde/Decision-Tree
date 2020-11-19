@@ -5,6 +5,7 @@ and compiles the numbers for each year into a decision tree readable value '''
 
 import requests
 import json
+import datetime
 
 from urllib.parse import urljoin
 from OpenWeather import weather_fetch
@@ -45,36 +46,75 @@ def climate_fetch(zipcode):
 
 def climate_process(api_data):
     ''' takes in the api data and returns the average climate in a zipcode 
-    crunches all the max and mins throughout each year for as many years as are on record ''' 
+    based on pattern of weather for the next three months at the location ''' 
 
     temp_total = 0
     counter = 0
 
     # for each year in the data, get all max 
-    for item in api_data['data']:
-        # print(' ----------------------------------------------------------- ')
-        # print(api_data['data'][item]['tasmax'])
+    for item in api_data['data'].keys():
+        print(' ----------------------------------------------------------- ')
+        print(item)
+        # print(api_data['data'][item]['tasmin'])
 
-        for temp in api_data['data'][item]['tasmax']:
-            if type(temp) == int or type(temp) == float:
-                counter += 1
-                temp_total += temp
+        if item == '2005':
+            
+            tmax = []
+            tmin = []
+            
+            # all the data for every day of the year
 
-        for temp in api_data['data'][item]['tasmin']:
-            if type(temp) == int or type(temp) == float:
-                counter += 1
-                temp_total += temp
+            # grabs the min for each day, appends to tmin variable
+            counter = 1
+            for thing in api_data['data'][item]['tasmin']:
+                if type(thing) == float:
+                    tmin.append(thing)
+                    counter += 1
+            
+            # grabs the max for each day, appends to max variable
+            counter2 = 1
+            for thing in api_data['data'][item]['tasmax']:
+                if type(thing) == float:
+                    tmax.append(thing)
+                    counter2 += 1
+            
+            zipped = zip(tmax, tmin)
+
+            print('ZIPPED: --------------------- ')
+            # counter3 = 1
+            for index, item in enumerate(zipped):
+                print(index, item)
+
+            # Find current month
+            currentDT = datetime.datetime.now()
+
+            print ("Current Year is: %d" % currentDT.year)
+            print ("Current Month is: %d" % currentDT.month)
+            
+            # Find the range of days in the year of the next 3 months
+
+
+        # for temp in api_data['data'][item]['tasmax']:
+        #     if type(temp) == int or type(temp) == float:
+        #         counter += 1
+        #         temp_total += temp
+
+        # for temp in api_data['data'][item]['tasmin']:
+        #     if type(temp) == int or type(temp) == float:
+        #         counter += 1
+        #         temp_total += temp
         
 
-    climate_average =round(temp_total / counter)
-    climate_f = round((climate_average - 273.15) * 1.8 + 32)
+    # climate_average =round(temp_total / counter)
+    # climate_f = round((climate_average - 273.15) * 1.8 + 32)
 
 
-    print(climate_f, temp_total, counter)
+    # print(climate_f, temp_total, counter)
 
     # print(api_data['data']['2003']['tasmax'])
 
-    return int(climate_f)
+    # return int(climate_f)
+    return
 
 def climate_translate(avg_climate):
     ''' Climate: 1=Arid, 2=Temperate, 3=Subtropical, 4=Tropical '''
