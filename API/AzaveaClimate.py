@@ -104,13 +104,13 @@ def climate_process(api_data):
             month_range = 0
 
             for index, temps in enumerate(zipped):
-                print(index, temps)
-                print("month range: ", month_range, "counter", counter)
+                # print(index, temps)
+                # print("month range: ", month_range, "counter", counter)
                 for key, value in days.items():
                     # print('key, value', key, value)
                     if value[0] == index:
                         # grab that index's temp for the number of days in that month
-                        print('MATCHINGGGGGGGGG --------------------------------------------------- ')
+                        # print('MATCHINGGGGGGGGG --------------------------------------------------- ')
                         month_range = value[1]
                         print(value[0], index)
                         temps_list.append([counter, temps])
@@ -126,28 +126,8 @@ def climate_process(api_data):
                     month_range = 0
             
             for item in temps_list:
+                print('TEMPS LIST')
                 print(item)
-
-        # for temp in api_data['data'][item]['tasmax']:
-        #     if type(temp) == int or type(temp) == float:
-        #         counter += 1
-        #         temp_total += temp
-
-        # for temp in api_data['data'][item]['tasmin']:
-        #     if type(temp) == int or type(temp) == float:
-        #         counter += 1
-        #         temp_total += temp
-        
-
-    # climate_average =round(temp_total / counter)
-    # climate_f = round((climate_average - 273.15) * 1.8 + 32)
-
-
-    # print(climate_f, temp_total, counter)
-
-    # print(api_data['data']['2003']['tasmax'])
-
-    # return int(climate_f)
     return
 
 def climate_translate(avg_climate):
