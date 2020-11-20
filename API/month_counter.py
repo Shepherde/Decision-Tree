@@ -29,7 +29,7 @@ def get_months(num):
                 months.append(item+1)
                 # print('counter ', counter)
 
-    print(months)
+    # print(months)
     return months
 
 def get_days(year, month_list):
@@ -38,12 +38,11 @@ def get_days(year, month_list):
 
     total_days = 0
     counter = 1
-
+    
     for month in range(1, 13):
 
         wkday_days = monthrange(year, month)
         days = wkday_days[1]
-        total_days += days
         # print(counter, days)
 
         # it's okay that we get the month from the same year even if it loops around to the next year
@@ -52,11 +51,12 @@ def get_days(year, month_list):
             if item == counter:
                 days_dict[item] = [total_days , days]
 
+        total_days += days
         counter += 1
-    
-    print(days_dict)
-    return days_dict
 
+    # dict(month:[start:total])
+    # print('Days: ', days_dict)
+    return days_dict
 
     
 

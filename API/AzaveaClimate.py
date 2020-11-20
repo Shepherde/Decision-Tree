@@ -82,10 +82,7 @@ def climate_process(api_data):
             
             zipped = zip(tmax, tmin)
 
-            print('ZIPPED: --------------------- ')
-            # counter3 = 1
-            for index, item in enumerate(zipped):
-                print(index, item)
+            print('ZIPPED: --------------------- ')            
 
             # Find current month
             currentDT = datetime.datetime.now()
@@ -97,9 +94,39 @@ def climate_process(api_data):
             next_three = get_months(currentDT.month)
             print(next_three)
 
-            # for index, item in enumerate(zipped):
+            # get the days in that year which correspond to our next three months *** 
+            days = get_days(int(item), next_three)
+            print(days)
 
+            # loop through zipped and match the days up to grab the values at that location in zipped
+            temps_list = []
+            counter = 0
+            month_range = 0
 
+            for index, temps in enumerate(zipped):
+                print(index, temps)
+                print("month range: ", month_range, "counter", counter)
+                for key, value in days.items():
+                    # print('key, value', key, value)
+                    if value[0] == index:
+                        # grab that index's temp for the number of days in that month
+                        print('MATCHINGGGGGGGGG --------------------------------------------------- ')
+                        month_range = value[1]
+                        print(value[0], index)
+                        temps_list.append([counter, temps])
+                        counter += 1
+                        # print("month range: ", month_range, "counter", counter)
+
+                if counter < month_range:
+                    temps_list.append([counter, temps])
+                    counter += 1
+                
+                else:
+                    counter = 0
+                    month_range = 0
+            
+            for item in temps_list:
+                print(item)
 
         # for temp in api_data['data'][item]['tasmax']:
         #     if type(temp) == int or type(temp) == float:
