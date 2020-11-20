@@ -1,7 +1,10 @@
 ''' CLIMATE HELPER FUNCTIONS '''
 
+from calendar import monthrange
+
 def get_months(num):
-    ''' gets next three months as list of numbers '''
+    ''' gets next three months as a list of numbers '''
+
     month_num = num
     beep = False 
     counter = 0
@@ -29,8 +32,35 @@ def get_months(num):
     print(months)
     return months
 
+def get_days(year, month_list):
+    ''' returns the number of days in each of the months as well as the days from that year when the month actually began '''
+    days_dict = {}
 
+    total_days = 0
+    counter = 1
+
+    for month in range(1, 13):
+
+        wkday_days = monthrange(year, month)
+        days = wkday_days[1]
+        total_days += days
+        # print(counter, days)
+
+        # it's okay that we get the month from the same year even if it loops around to the next year
+        # because it's an average of all the years, so it gets calculated anyways. 
+        for item in month_list:
+            if item == counter:
+                days_dict[item] = [total_days , days]
+
+        counter += 1
+    
+    print(days_dict)
+    return days_dict
+
+
+    
 
 if __name__ == "__main__":
-    get_months(3)
+    m_list = get_months(10)
+    days_month = get_days(2005, m_list)
         

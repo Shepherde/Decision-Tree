@@ -7,6 +7,8 @@ import requests
 import json
 import datetime
 
+from month_counter import *
+
 from urllib.parse import urljoin
 from OpenWeather import weather_fetch
 
@@ -88,10 +90,15 @@ def climate_process(api_data):
             # Find current month
             currentDT = datetime.datetime.now()
 
-            print ("Current Year is: %d" % currentDT.year)
-            print ("Current Month is: %d" % currentDT.month)
+            # print ("Current Year is: %d" % currentDT.year)
+            # print ("Current Month is: %d" % currentDT.month)
             
             # Find the range of days in the year of the next 3 months
+            next_three = get_months(currentDT.month)
+            print(next_three)
+
+            # for index, item in enumerate(zipped):
+
 
 
         # for temp in api_data['data'][item]['tasmax']:
