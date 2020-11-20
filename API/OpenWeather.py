@@ -85,16 +85,7 @@ def translate_avg_weather(avg_temp):
     else:
         print('error: category')
         return  
-    
-    # We have two possible ranges in the dataset for weather listed above
-    if category < 3:
-        dataset_range = '1-2'
-    elif category == 3:
-        dataset_range = '3'
-    elif category == 4:
-        dataset_range = '4'
-
-    # print(category)
+   
     return int(category)
 
 
