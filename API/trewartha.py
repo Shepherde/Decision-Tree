@@ -63,3 +63,8 @@ def trewartha(zipcode):
 
     except requests.exceptions.RequestException as e:
         raise e
+
+if __name__ == '__main__':
+
+    zip = '94108'
+    print(trewartha(zip))

@@ -33,7 +33,7 @@ def climate_fetch(zipcode):
     scenario = 'historical'
     params = '2010'
 
-    querystring = '/api/climate-data/{}/{}/{}/indicator/example_temperature_indicator'.format(lat, lon, scenario)
+    querystring = '/api/climate-data/{}/{}/{}'.format(lat, lon, scenario)
 
     # List all scenarios
     scenario_querystring = '/api/scenario'
@@ -185,11 +185,6 @@ def weather_num(zipcode):
 
     return category
 
-if __name__ == "__main__":
-    
-    zipcode = '94103'
-    weather_num(zipcode)
-
 def climate_fetch_perc(lat, lon):
     ''' function fetches the json data for a zipcode's climate percipitation data
     returns the raw json data. ''' 
@@ -245,3 +240,9 @@ def climate_fetch_temp(lat, lon):
 
     except requests.exceptions.RequestException as e:
         raise e
+
+
+if __name__ == "__main__":
+    
+    zipcode = '94103'
+    weather_num(zipcode)
