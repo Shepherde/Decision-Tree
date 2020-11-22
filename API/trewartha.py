@@ -16,8 +16,6 @@ def trewartha(zipcode):
     if lat[0] == "-":
         hemisphere = "S"
 
-    print(lat, lon)
-
     temp_data = climate_fetch_temp(lat, lon)
     percip_data = climate_fetch_perc(lat, lon)
 
@@ -57,5 +55,3 @@ def trewartha(zipcode):
 
     except requests.exceptions.RequestException as e:
         raise e
-
-trewartha("00810")
