@@ -191,8 +191,8 @@ if __name__ == "__main__":
     weather_num(zipcode)
 
 def climate_fetch_perc(lat, lon):
-    ''' function fetches the json data for a zipcode's climate data
-    returns the raw json data ''' 
+    ''' function fetches the json data for a zipcode's climate percipitation data
+    returns the raw json data. ''' 
     
     token = '6a096669f08500167edb361455210681ad1d8cbd'
     baseurl = 'https://app.climate.azavea.com/api/'
@@ -219,7 +219,7 @@ def climate_fetch_perc(lat, lon):
         raise e
 
 def climate_fetch_temp(lat, lon):
-    ''' function fetches the json data for a zipcode's climate data
+    ''' function fetches the json data for a zipcode's climate temperatire data
     returns the raw json data ''' 
     
     token = '6a096669f08500167edb361455210681ad1d8cbd'
