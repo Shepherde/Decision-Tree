@@ -2,6 +2,14 @@
 # Created with Josh Gordon's ML Recipes
 import csv
 
+# hardiness - takes in climate number -> hardiness zone (str)
+from API.Hardiness import hardiness_encoder
+# climate - input zipcode -> climate category for tree (str)
+from API.trewartha import translate_trewartha
+# weather - input zipcode -> weather category for tree (int unless False)
+from API.AzaveaClimate import weather_num
+
+
 def csv_wrangle(file):
     ''' wrangles with the csv file -> returns list of each row '''
     dataset_list = []
@@ -236,6 +244,52 @@ def test(test_data):
         print ("Actual: %s. Predicted: %s" %
            (row[-1], print_leaf(classify(row, my_tree))))
 
+
+
+
+
+
+def tree_from_zipcode(zipcode, sun, size, ptype, experience):
+    ''' create decision tree array by calling correct files and inserting zipcode/user data into array'''
+    # zipcode = user_value
+
+    hardiness = hardiness_encoder(zipcode)
+    climate = translate_trewartha(zipcode)
+    weather = weather_num(zipcode)
+
+    # Sun,Hardiness,Size,Climate,Weather,Type,Experience,Pack
+    # print(type(hardiness), type(climate), type(weather))
+
+    user_profile = [sun, hardiness, size, climate, weather, ptype, experience, 'FFAP3w3']
+    return user_profile
+
+    
+if __name__ == "__main__":
+
+#     # GRAB USER DATA
+    header = ["Sun", "Hardiness", "Size", "Climate", "Weather", "Type", "Experience", "Pack"]
+
+#     # Urbana IL 
+    zipcode = '61801'
+    sun = '1'
+    size = '6'
+    ptype = 'h'
+    experience = '3' 
+
+    user = tree_from_zipcode(zipcode, sun, size, ptype, experience)
+    print(user)
+
+#     # build tree from dataset
+    my_tree = build_tree(csv_wrangle('Datasets/Generate_20.csv'))
+
+#     # print tree
+    print(my_tree)
+
+#     # classify the user
+    print('TEST --- ')
+    test(user)
+
+
 if __name__ == "__main__":
 
     header = ["Sun", "Hardiness", "Size", "Climate", "Weather", "Type", "Experience", "Pack"]
@@ -254,9 +308,10 @@ if __name__ == "__main__":
 
     # BUILD RUN TEST the TREE
     print("-------- TREE -------------------------------------")
-    # my_tree = build_tree(csv_wrangle('Datasets/UserToPack.csv'))
-    my_tree = build_tree(csv_wrangle('Datasets/Generate_20.csv'))
+
+    my_tree = build_tree(csv_wrangle('Datasets/UserToPack.csv'))
+    # my_tree = build_tree(csv_wrangle('Datasets/Generate_20.csv'))
     print_tree(my_tree)
     test(testing_UserToPack)
 
-    # csv_wrangle('Datasets/UserToPack.csv')
+    csv_wrangle('Datasets/UserToPack.csv')

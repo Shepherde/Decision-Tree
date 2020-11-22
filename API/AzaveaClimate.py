@@ -10,10 +10,10 @@ import requests
 import json
 import datetime
 
-from month_counter import *
+from API.month_counter import *
 
 from urllib.parse import urljoin
-from OpenWeather import weather_fetch
+from API.OpenWeather import weather_fetch
 
 
 def climate_fetch(zipcode):
@@ -49,7 +49,7 @@ def climate_fetch(zipcode):
     except requests.exceptions.RequestException as e:
         raise e
 
-def climate_process(api_data):
+def three_mnth_climate_process(api_data):
     ''' takes in the api data and returns the average climate in a zipcode 
     based on pattern of weather for the next three months at the location 
     Averages the Max and Min temperature of each day of the next three months in each year for n years on record.
@@ -191,15 +191,16 @@ def translate(average_k):
             print('error: weather category')
             return  
         
-        print('Temp Average (K):', avg_temp, ' Category:', category)
-        return category
+        # print('Temp Average (K):', avg_temp, ' Category:', category)
+        print('weather: ', category)
+        return str(category)
 
 def weather_num(zipcode):
-
+    ''' CLIMATE DATA PROCESSING FOR THE THREE AVG TEMP MONTH FORECAST ''' 
     try:
 
         fetch = climate_fetch(zipcode)
-        process = climate_process(fetch)
+        process = three_mnth_climate_process(fetch)
         three_mnth = average(process)
         category = translate(three_mnth)
 
@@ -207,6 +208,59 @@ def weather_num(zipcode):
         raise e
 
     return category
+
+def total_climate_process(api_data):
+    ''' takes in the api data and returns the average climate in a zipcode 
+    crunches ALL the max and mins throughout each year for as many years as are on record 
+    USED FOR HARDINESS
+    ''' 
+    if len(api_data['data']) == 0:
+        print('NO DATA AVAILABLE')
+        return  False
+
+    else:
+        temp_total = 0
+        counter = 0
+
+        # for each year in the data, get all max and mins
+        for item in api_data['data']:
+            # print(' ----------------------------------------------------------- ')
+            # print(api_data['data'][item]['tasmax'])
+
+            for temp in api_data['data'][item]['tasmax']:
+                if type(temp) == int or type(temp) == float:
+                    counter += 1
+                    temp_total += temp
+
+            for temp in api_data['data'][item]['tasmin']:
+                if type(temp) == int or type(temp) == float:
+                    counter += 1
+                    temp_total += temp
+
+        climate_average =round(temp_total / counter)
+        climate_f = round((climate_average - 273.15) * 1.8 + 32)
+
+
+        # print(climate_f, temp_total, counter)
+
+        # print(api_data['data']['2003']['tasmax'])
+
+        return climate_f
+
+def total_climate_num(zipcode):
+    ''' COMBINED ABOVE TWO FUNCS ''' 
+
+    try:
+
+        fetch = climate_fetch(zipcode)
+        climate_f = total_climate_process(fetch)
+        return climate_f
+
+    except requests.exceptions.RequestException as e:
+        raise e
+
+    
+
 
 def climate_fetch_perc(lat, lon):
     ''' function fetches the json data for a zipcode's climate percipitation data

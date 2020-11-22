@@ -1,6 +1,6 @@
 import requests
-from AzaveaClimate import climate_fetch_perc, climate_fetch_temp
-from OpenWeather import weather_fetch
+from API.AzaveaClimate import climate_fetch_perc, climate_fetch_temp
+from API.OpenWeather import weather_fetch
 
 
 
@@ -91,7 +91,7 @@ def translate_trewartha(zipcode):
             # tropical
             value = '4'
 
-        print('value: ', value)
+        print('trewartha: ', value)
         return value
     else:
         return False 
