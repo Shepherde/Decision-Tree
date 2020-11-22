@@ -99,5 +99,5 @@ def translate_trewartha(zipcode):
 
 if __name__ == '__main__':
 
-    zip = '61801'
-    translate_trewartha(zip)
+    zipcode = '61801'
+    translate_trewartha(zipcode)
