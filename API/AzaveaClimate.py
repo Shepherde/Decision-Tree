@@ -33,7 +33,7 @@ def climate_fetch(zipcode):
     scenario = 'historical'
     params = '2010'
 
-    querystring = '/api/climate-data/{}/{}/{}/'.format(lat, lon, scenario)
+    querystring = '/api/climate-data/{}/{}/{}/indicator/example_temperature_indicator'.format(lat, lon, scenario)
 
     # List all scenarios
     scenario_querystring = '/api/scenario'
@@ -189,3 +189,59 @@ if __name__ == "__main__":
     
     zipcode = '94103'
     weather_num(zipcode)
+
+def climate_fetch_perc(lat, lon):
+    ''' function fetches the json data for a zipcode's climate percipitation data
+    returns the raw json data. ''' 
+    
+    token = '6a096669f08500167edb361455210681ad1d8cbd'
+    baseurl = 'https://app.climate.azavea.com/api/'
+    header = {'Authorization': 'Token {}'.format(token),
+                       'Origin': 'https://www.serch.us'}
+    
+    scenario = 'historical'
+    params = '2010'
+
+    querystring = '/api/climate-data/{}/{}/{}/indicator/total_precipitation?units=mm&time_aggregation=monthly&years=2005'.format(lat, lon, scenario)
+
+    # List all scenarios
+    scenario_querystring = '/api/scenario'
+
+    url = urljoin(baseurl,querystring)
+
+    try:
+        response = requests.get(url, headers=header)
+        response.raise_for_status()
+        result = json.loads(response.content.decode())    
+        return result
+
+    except requests.exceptions.RequestException as e:
+        raise e
+
+def climate_fetch_temp(lat, lon):
+    ''' function fetches the json data for a zipcode's climate temperatire data
+    returns the raw json data ''' 
+    
+    token = '6a096669f08500167edb361455210681ad1d8cbd'
+    baseurl = 'https://app.climate.azavea.com/api/'
+    header = {'Authorization': 'Token {}'.format(token),
+                       'Origin': 'https://www.serch.us'}
+    
+    scenario = 'historical'
+    params = '2010'
+
+    querystring = '/api/climate-data/{}/{}/{}/indicator/average_high_temperature?time_aggregation=monthly&years=2005&units=C'.format(lat, lon, scenario)
+
+    # List all scenarios
+    scenario_querystring = '/api/scenario'
+
+    url = urljoin(baseurl,querystring)
+
+    try:
+        response = requests.get(url, headers=header)
+        response.raise_for_status()
+        result = json.loads(response.content.decode())    
+        return result
+
+    except requests.exceptions.RequestException as e:
+        raise e
