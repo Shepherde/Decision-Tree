@@ -16,26 +16,26 @@ def weather_fetch(zipcode):
         print("Error: " + str(r.status_code))
     else:
         json_object = r.json()
-    # print(json_object)
+        # print(json_object)
 
-    city = json_object['name']
-    country = json_object['sys']['country']
+        city = json_object['name']
+        country = json_object['sys']['country']
 
-    lat = str(json_object['coord']['lat'])
-    lon = str(json_object['coord']['lon'])
+        lat = str(json_object['coord']['lat'])
+        lon = str(json_object['coord']['lon'])
 
-    # Second request made to Open Weather. Using lat long -> receive temperature forecast for the next 7 days
-    # if we want to do the past 5 days: https://api.openweathermap.org/data/2.5/onecall/timemachine?lat={lat}&lon={lon}&dt={time}&appid={API key}
-    #  We exclude data we don't need, like minute by minute data
-    r2 = requests.get('https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+lon+'&exclude=hourly,minutely&appid=f56ee6c2422b8ff51dadde24ec803e5f')
-    if r.status_code != 200:  # Handle erroneous requests
-        print("Error: " + str(r.status_code))
-    else:
-        json_object_2 = r2.json()
-        # for k,v in json_object.items():
-        #     print(k,v)
+        # Second request made to Open Weather. Using lat long -> receive temperature forecast for the next 7 days
+        # if we want to do the past 5 days: https://api.openweathermap.org/data/2.5/onecall/timemachine?lat={lat}&lon={lon}&dt={time}&appid={API key}
+        #  We exclude data we don't need, like minute by minute data
+        r2 = requests.get('https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+lon+'&exclude=hourly,minutely&appid=f56ee6c2422b8ff51dadde24ec803e5f')
+        if r.status_code != 200:  # Handle erroneous requests
+            print("Error: " + str(r.status_code))
+        else:
+            json_object_2 = r2.json()
+            # for k,v in json_object.items():
+            #     print(k,v)
 
-    return [json_object_2, city, country, lat, lon]
+        return [json_object_2, city, country, lat, lon]
 
 
 
