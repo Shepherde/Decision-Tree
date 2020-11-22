@@ -137,10 +137,10 @@ def climate_process(api_data):
                     counter = 0
                     month_range = 0
             
-            print('')
-            print('TEMPS LIST ', item, ' --------------------------------------------------------')
-            for temps in temps_list:
-                print(temps)
+            # print('')
+            # print('TEMPS LIST ', item, ' --------------------------------------------------------')
+            # for temps in temps_list:
+            #     print(temps)
 
         return temps_list
 
@@ -266,6 +266,7 @@ def climate_fetch_temp(lat, lon):
 
 
 if __name__ == "__main__":
-    
-    zipcode = '94108'
+
+    # Urbana IL 
+    zipcode = '61801'
     weather_num(zipcode)

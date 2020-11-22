@@ -64,7 +64,40 @@ def trewartha(zipcode):
     except requests.exceptions.RequestException as e:
         raise e
 
+def translate_trewartha(zipcode):
+    # Translates the trewartha value into category for decision tree
+
+    classified = trewartha(zipcode)
+    value = None
+
+    if type(classified) != bool:
+
+        classi = str(classified[0])
+        # print("class: ", classi)
+
+        if classi == 'B':
+            # arid / semi-arid
+            value = '1'
+
+        elif classi == 'D':
+            # temperate / continental
+            value = '2'
+
+        elif classi == 'C':
+            # subtropical
+            value = '3'
+
+        elif classi == 'A':
+            # tropical
+            value = '4'
+
+        print('value: ', value)
+        return value
+    else:
+        return False 
+
+
 if __name__ == '__main__':
 
-    zip = '94108'
-    print(trewartha(zip))
+    zip = '61801'
+    translate_trewartha(zip)
