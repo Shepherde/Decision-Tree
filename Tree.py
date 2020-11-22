@@ -266,11 +266,13 @@ def tree_from_zipcode(zipcode, sun, size, ptype, experience):
     
 if __name__ == "__main__":
 
+    user_list = []
+
 #     # GRAB USER DATA
     header = ["Sun", "Hardiness", "Size", "Climate", "Weather", "Type", "Experience", "Pack"]
 
 #     # Urbana IL 
-    zipcode = '61801'
+    zipcode = '94108'
     sun = '1'
     size = '6'
     ptype = 'h'
@@ -278,40 +280,47 @@ if __name__ == "__main__":
 
     user = tree_from_zipcode(zipcode, sun, size, ptype, experience)
     print(user)
+    user_list.append(user)
+    user_list.append(user)
+    user_list.append(user)
 
 #     # build tree from dataset
     my_tree = build_tree(csv_wrangle('Datasets/Generate_20.csv'))
 
 #     # print tree
-    print(my_tree)
+    print_tree(my_tree)
 
 #     # classify the user
     print('TEST --- ')
-    test(user)
+    test(user_list)
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-    header = ["Sun", "Hardiness", "Size", "Climate", "Weather", "Type", "Experience", "Pack"]
+    # header = ["Sun", "Hardiness", "Size", "Climate", "Weather", "Type", "Experience", "Pack"]
+    # sun = '1'
+    # size = '6'
+    # ptype = 'h'
+    # experience = '3' 
 
-    testing_UserToPack = [
-        ['2', '10-11', '1', '1', '3', 'f-h', '2-3', 'FFAP3w3'],
-        ['2', '10-11', '1', '3-4', '1-2', 'f-h', '2-3', 'TP3w1'],
-        ['3', '5-9', '2-3', '1', '3', 'f-h', '2-3', 'AP6w3'],
-        ['1', '5-9', '1', '1', '1-2', 'f-h\xa0', '1', 'AA1w1'],
-        ['1', '5-9', '2-3', '1', '1-2', 'f-h', '1', 'AA2w1'],
-        ['3', '5-9', '2-3', '1', '3', 'f-h', '2'],
-        ["3","5-9","1","2-3","4","f-h","2-3"],
-        ['2','5-9','1','2-3','3','f-h','1']
+    # testing_UserToPack = [
+    #     ['2', '10-11', '1', '1', '3', 'f-h', '2-3', 'FFAP3w3'],
+    #     ['2', '10-11', '1', '3-4', '1-2', 'f-h', '2-3', 'TP3w1'],
+    #     ['3', '5-9', '2-3', '1', '3', 'f-h', '2-3', 'AP6w3'],
+    #     ['1', '5-9', '1', '1', '1-2', 'f-h\xa0', '1', 'AA1w1'],
+    #     ['1', '5-9', '2-3', '1', '1-2', 'f-h', '1', 'AA2w1'],
+    #     ['3', '5-9', '2-3', '1', '3', 'f-h', '2'],
+    #     ["3","5-9","1","2-3","4","f-h","2-3"],
+    #     ['2','5-9','1','2-3','3','f-h','1'],
+    #     ['1', '12', '6', '3', '4', 'h', '3']
+    # ]
 
-    ]
+    # # BUILD RUN TEST the TREE
+    # print("-------- TREE -------------------------------------")
 
-    # BUILD RUN TEST the TREE
-    print("-------- TREE -------------------------------------")
-
-    my_tree = build_tree(csv_wrangle('Datasets/UserToPack.csv'))
+    # # my_tree = build_tree(csv_wrangle('Datasets/UserToPack.csv'))
     # my_tree = build_tree(csv_wrangle('Datasets/Generate_20.csv'))
-    print_tree(my_tree)
-    test(testing_UserToPack)
+    # print_tree(my_tree)
+    # test(testing_UserToPack)
 
-    csv_wrangle('Datasets/UserToPack.csv')
+    # csv_wrangle('Datasets/UserToPack.csv')
