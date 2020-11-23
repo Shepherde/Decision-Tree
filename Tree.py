@@ -260,7 +260,7 @@ def tree_from_zipcode(zipcode, sun, size, ptype, experience):
     # Sun,Hardiness,Size,Climate,Weather,Type,Experience,Pack
     # print(type(hardiness), type(climate), type(weather))
 
-    user_profile = [sun, hardiness, size, climate, weather, ptype, experience, 'FFAP3w3']
+    user_profile = [sun, hardiness, size, climate, weather, ptype, experience]
     return user_profile
 
     
@@ -271,27 +271,26 @@ if __name__ == "__main__":
 #     # GRAB USER DATA
     header = ["Sun", "Hardiness", "Size", "Climate", "Weather", "Type", "Experience", "Pack"]
 
-#     # Urbana IL 
-    zipcode = '94108'
+# urbana
+    zipcode = '60540'
     sun = '1'
-    size = '6'
-    ptype = 'h'
-    experience = '3' 
+    size = '1'
+    ptype = 'f'
+    experience = '1' 
 
     user = tree_from_zipcode(zipcode, sun, size, ptype, experience)
     print(user)
     user_list.append(user)
-    user_list.append(user)
-    user_list.append(user)
+    # user_list.append(user)
+    # user_list.append(user)
 
 #     # build tree from dataset
-    my_tree = build_tree(csv_wrangle('Datasets/Generate_20.csv'))
+    my_tree = build_tree(csv_wrangle('Datasets/Generate_100.csv'))
 
 #     # print tree
-    print_tree(my_tree)
+    # print_tree(my_tree)
 
 #     # classify the user
-    print('TEST --- ')
     test(user_list)
 
 

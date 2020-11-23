@@ -75,5 +75,5 @@ def hardiness_encoder(zipcode):
 
 if __name__ == "__main__":
 
-    zipcode = '61801'
+    zipcode = '60540'
     hardiness_encoder(zipcode)
