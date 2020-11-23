@@ -268,10 +268,10 @@ if __name__ == "__main__":
 
     user_list = []
 
-#     # GRAB USER DATA
+    # GRAB USER DATA
     header = ["Sun", "Hardiness", "Size", "Climate", "Weather", "Type", "Experience", "Pack"]
 
-# urbana
+    # urbana
     zipcode = '60540'
     sun = '1'
     size = '1'
@@ -292,6 +292,9 @@ if __name__ == "__main__":
 
 #     # classify the user
     test(user_list)
+
+
+
 
 
 # if __name__ == "__main__":
